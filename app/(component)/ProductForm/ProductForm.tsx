@@ -1,5 +1,6 @@
+// ProductForm.tsx
 "use client";
-
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -9,26 +10,24 @@ interface ProductFormProps {
     productVariant: string;
     productPrice: number;
   };
-  onUpdate: (updatedProduct: {
-    productName: string;
-    productVariant: string;
-    productPrice: number;
-  }) => void;
+  onUpdate: (updated: ProductFormProps["initialData"]) => void;
 }
 
 export default function ProductForm({
   initialData,
   onUpdate,
 }: ProductFormProps) {
+  const [values, setValues] = useState(initialData);
+
+  // Keep the form in sync if initialData changes from outside
+  // (e.g. navigating to a different product)
+  useEffect(() => {
+    setValues(initialData);
+  }, [initialData]);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    onUpdate({
-      ...initialData,
-      productName: formData.get("productName") as string,
-      productVariant: formData.get("productVariant") as string,
-      productPrice: Number(formData.get("productPrice")),
-    });
+    onUpdate(values);
   };
 
   return (
@@ -44,8 +43,10 @@ export default function ProductForm({
               Product Name
             </label>
             <Input
-              name="productName"
-              defaultValue={initialData?.productName ?? ""}
+              value={values.productName}
+              onChange={(e) =>
+                setValues((v) => ({ ...v, productName: e.target.value }))
+              }
               required
             />
           </div>
@@ -55,8 +56,10 @@ export default function ProductForm({
               Variant
             </label>
             <Input
-              name="productVariant"
-              defaultValue={initialData?.productVariant ?? ""}
+              value={values.productVariant}
+              onChange={(e) =>
+                setValues((v) => ({ ...v, productVariant: e.target.value }))
+              }
               required
             />
           </div>
@@ -67,10 +70,12 @@ export default function ProductForm({
             Price ($)
           </label>
           <Input
-            name="productPrice"
             type="number"
             step="0.01"
-            defaultValue={initialData?.productPrice ?? 0}
+            value={values.productPrice}
+            onChange={(e) =>
+              setValues((v) => ({ ...v, productPrice: Number(e.target.value) }))
+            }
             required
           />
         </div>

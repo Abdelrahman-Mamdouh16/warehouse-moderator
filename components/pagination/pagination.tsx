@@ -22,7 +22,7 @@ export function PaginationComponent({
   const hasNext = currentPage < totalPages;
 
   return (
-    <Pagination className="mt-5">
+    <Pagination className="py-5">
       <PaginationContent>
         {/* Previous page link */}
         <PaginationItem>

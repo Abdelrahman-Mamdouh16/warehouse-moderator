@@ -1,8 +1,8 @@
 // ProductForm.tsx
 "use client";
-import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useState } from "react";
 
 interface ProductFormProps {
   initialData: {
@@ -21,9 +21,7 @@ export default function ProductForm({
 
   // Keep the form in sync if initialData changes from outside
   // (e.g. navigating to a different product)
-  useEffect(() => {
-    setValues(initialData);
-  }, [initialData]);
+ 
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

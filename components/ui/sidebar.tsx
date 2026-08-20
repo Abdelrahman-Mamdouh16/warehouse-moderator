@@ -140,7 +140,6 @@ function Sidebar({
   collapsible = "icon",
   className,
   children,
-  dir,
   ...props
 }: React.ComponentProps<"div"> & {
   side?: "left" | "right"

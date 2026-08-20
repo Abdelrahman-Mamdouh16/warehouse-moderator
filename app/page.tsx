@@ -4,6 +4,7 @@ import { buttonVariants } from "../components/ui/button";
 import InfoCard from "./(component)/InfoCard/InfoCard";
 
 export default function Dashboard() {
+  // Static user profile data required by assessment guidelines
   const personalInfo = [
     { label: "Name", value: "Abdelrahman Mamdouh" },
     { label: "Age", value: "25" },
@@ -19,6 +20,7 @@ export default function Dashboard() {
       <AppNavbar content="Dashboard" />
       <InfoCard personalInfo={personalInfo} />
 
+      {/* CTA to main products catalog */}
       <Link
         href="/products"
         className={

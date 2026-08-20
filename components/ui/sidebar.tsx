@@ -96,7 +96,6 @@ function SidebarProvider({
     return () => window.removeEventListener("keydown", handleKeyDown)
   }, [toggleSidebar])
 
-  // عند فتح الموقع من الموبايل يجبر الـ state تكون collapsed لعرض الأيقونات فقط
   const state = isMobile ? "collapsed" : open ? "expanded" : "collapsed"
 
   const contextValue = React.useMemo<SidebarContextProps>(
@@ -165,7 +164,7 @@ function Sidebar({
     )
   }
 
-  // الـ collapsible في الموبايل هيكون دايماً icon
+ 
   const effectiveCollapsible = isMobile ? "icon" : collapsible
 
   return (
@@ -469,7 +468,7 @@ function SidebarMenuButton({
     isActive?: boolean
     tooltip?: string | React.ComponentProps<typeof TooltipContent>
   } & VariantProps<typeof sidebarMenuButtonVariants>) {
-  const { isMobile, state } = useSidebar()
+  const {  state } = useSidebar()
   const comp = useRender({
     defaultTagName: "button",
     props: mergeProps<"button">(

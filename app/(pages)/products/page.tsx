@@ -1,10 +1,8 @@
-import { LoaderCircle } from "lucide-react";
 import ProductCard from "../../(component)/ProductCard/ProductCard";
 import AppNavbar from "../../../components/AppNavbar/AppNavbar";
+import Loading from "../../../components/Loading/Loading";
 import { PaginationComponent } from "../../../components/pagination/pagination";
-import { products } from "../../../lib/api";
-
-
+import { getProducts } from "../../../lib/api";
 
 interface PageProps {
   searchParams: Promise<{ page?: string }>;
@@ -14,14 +12,14 @@ interface PageProps {
   searchParams: Promise<{ page?: string }>;
 }
 
+// Server Component: fetches warehouse catalog directly on the server
 export default async function Products({ searchParams }: PageProps) {
   const params = await searchParams;
-
+  const products = await getProducts();
   const currentPage = Number(params.page) || 1;
   const itemsPerPage = 8;
 
-
-
+  // Server-side pagination calculation
   const totalPages = Math.ceil(products.length / itemsPerPage);
 
   const start = (currentPage - 1) * itemsPerPage;
@@ -33,12 +31,10 @@ export default async function Products({ searchParams }: PageProps) {
     <div className="flex flex-col gap-y-5">
       <AppNavbar content="Products" />
       {currentProducts.length === 0 ? (
-        <LoaderCircle
-          className="mx-auto my-10 animate-spin text-primary"
-          size={40}
-        />
+        <Loading/>
       ) : (
         <>
+          {/* Responsive product catalog grid */}
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {currentProducts.map((product) => (
               <ProductCard
@@ -51,6 +47,7 @@ export default async function Products({ searchParams }: PageProps) {
             ))}
           </div>
 
+          {/* URL-driven pagination controls */}
           <PaginationComponent
             currentPage={currentPage}
             totalPages={totalPages}

@@ -15,6 +15,7 @@ export function PaginationComponent({
   currentPage,
   totalPages,
 }: PaginationProps) {
+  // Hide controls if there's only one page or no data
   if (totalPages <= 1) return null;
 
   const hasPrevious = currentPage > 1;
@@ -23,6 +24,7 @@ export function PaginationComponent({
   return (
     <Pagination className="mt-5">
       <PaginationContent>
+        {/* Previous page link */}
         <PaginationItem>
           {hasPrevious ? (
             <Link
@@ -40,12 +42,14 @@ export function PaginationComponent({
           )}
         </PaginationItem>
 
+        {/* Current page indicator */}
         <PaginationItem>
           <span className="px-4 text-sm font-medium">
             Page {currentPage} of {totalPages}
           </span>
         </PaginationItem>
 
+        {/* Next page link */}
         <PaginationItem>
           {hasNext ? (
             <Link

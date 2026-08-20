@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist } from "next/font/google";
 import { AppSidebar } from "../components/AppSidebar/AppSidebar";
 import { ThemeProvider } from "../components/theme/ThemeProvider";
 import { SidebarProvider } from "../components/ui/sidebar";
@@ -7,17 +7,16 @@ import { TooltipProvider } from "../components/ui/tooltip";
 import "./globals.css";
 import { Cairo } from "next/font/google";
 
+// Font configurations with performance optimizations (explicit weights & swap display)
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 const fontCairo = Cairo({
   subsets: ["arabic", "latin"],
+  weight: ["400", "600", "700"],
   variable: "--font-cairo",
-});
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -30,9 +29,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${fontCairo.variable} ${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${fontCairo.variable} ${geistSans.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        {/* Global theme, sidebar, and tooltip context wrappers */}
         <ThemeProvider>
           <TooltipProvider>
             <SidebarProvider>

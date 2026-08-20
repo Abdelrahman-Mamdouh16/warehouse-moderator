@@ -1,6 +1,6 @@
 import Link from "next/link";
 import AppNavbar from "../components/AppNavbar/AppNavbar";
-import { Button } from "../components/ui/button";
+import { buttonVariants } from "../components/ui/button";
 import InfoCard from "./(component)/InfoCard/InfoCard";
 
 export default function Dashboard() {
@@ -18,11 +18,15 @@ export default function Dashboard() {
     <div className="flex flex-col gap-y-5">
       <AppNavbar content="Dashboard" />
       <InfoCard personalInfo={personalInfo} />
-      <Button variant="default" className="w-fit">
-        <Link href="/products" className="px-10">
-          View Products
-        </Link>
-      </Button>
+
+      <Link
+        href="/products"
+        className={
+          buttonVariants({ variant: "default", size: "sm" }) + " px-10 w-fit"
+        }
+      >
+        View Products
+      </Link>
     </div>
   );
 }

@@ -1,7 +1,10 @@
-import React from 'react'
+import AppNavbar from "../../../components/AppNavbar/AppNavbar";
 
-export default function page() {
-    return (
-        <div>products</div>
-    )
+export default function Products() {
+  return (
+    <>
+      <AppNavbar content="Products" />
+      <div>products</div>
+    </>
+  );
 }

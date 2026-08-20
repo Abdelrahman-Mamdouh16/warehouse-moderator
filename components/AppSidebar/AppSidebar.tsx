@@ -15,10 +15,14 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { ThemeToggle } from "../theme/ThemeToggle";
+import { useTheme } from "next-themes";
+import { usePathname } from "next/navigation";
 
 export function AppSidebar() {
   // Check mobile state to control tooltip behavior
   const { isMobile } = useSidebar();
+  const { resolvedTheme } = useTheme();
+  const pathname = usePathname();
   // Unified configuration for top and bottom navigation items
   const items = {
     top: [
@@ -48,9 +52,11 @@ export function AppSidebar() {
                   <SidebarMenuButton
                     render={<Link href={item.url} />}
                     tooltip={isMobile ? item.title : undefined}
+                    isActive={pathname === item.url}
+                    className={pathname === item.url ? "text-accent" : ""}
                   >
-                    <item.icon />
-                    <span>{item.title}</span>
+                     <item.icon className={pathname === item.url ? "text-accent  dark:text-accent" : ""} />
+                    <span className={pathname === item.url ? "text-accent  dark:text-accent" : ""}>{item.title}</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
@@ -65,11 +71,11 @@ export function AppSidebar() {
                 const ElementComponent = item?.element;
 
                 return (
-                  <SidebarMenuItem key={`item?.title` + i}>
+                  <SidebarMenuItem key={`${item?.title}` + i}>
                     {/* Conditionally render custom components vs standard link items */}
                     {ElementComponent ? (
                       <SidebarMenuButton
-                        tooltip={item?.title}
+                        tooltip={resolvedTheme === "dark" ? "Light Mode" : "Dark Mode"}
                         className="cursor-pointer py-0"
                       >
                         <ElementComponent />

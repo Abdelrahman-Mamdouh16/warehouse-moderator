@@ -1,37 +1,87 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Background */
   --background: #faf7f0;
-  /* Surface */
   --surface: #ffffff;
-  /* Text */
   --foreground: #1b1a18;
-  /* Secondary text */
   --muted: #6b5d3f;
-  /* Accent */
   --accent: #cf8b05;
-  /* Accent hover/secondary */
   --accent-hover: #b87a04;
-  /* Border */
   --border: #e5dcc8;
+
+  --card: #ffffff;
+  --card-foreground: #1b1a18;
+  --popover: #ffffff;
+  --popover-foreground: #1b1a18;
+  --primary: #cf8b05;
+  --primary-foreground: #ffffff;
+  --secondary: #f5f0e8;
+  --secondary-foreground: #1b1a18;
+  --muted-foreground: #6b5d3f;
+  --accent-foreground: #ffffff;
+  --destructive: oklch(0.577 0.245 27.325);
+  --input: #e5dcc8;
+  --ring: #cf8b05;
+
+  --chart-1: #cf8b05;
+  --chart-2: #b87a04;
+  --chart-3: #6b5d3f;
+  --chart-4: #392d15;
+  --chart-5: #1b1a18;
+
+  --radius: 0.625rem;
+
+  --sidebar: #ffffff;
+  --sidebar-foreground: #1b1a18;
+  --sidebar-primary: #cf8b05;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f5f0e8;
+  --sidebar-accent-foreground: #1b1a18;
+  --sidebar-border: #e5dcc8;
+  --sidebar-ring: #cf8b05;
 }
 
 .dark {
-  /* Background	#1B1A18 */
   --background: #1b1a18;
-  /* Surface 	#392D15 */
   --surface: #392d15;
-  /* Text #F5F0E8 */
   --foreground: #f5f0e8;
-  /* Text #B8A888 */
   --muted: #b8a888;
-  /* Accent	#F5A300 */
   --accent: #f5a300;
-  /* Accent hover/secondary	#CF8B05 */
   --accent-hover: #cf8b05;
-  /* Border	#4A3D1F  */
   --border: #4a3d1f;
+
+  --card: #392d15;
+  --card-foreground: #f5f0e8;
+  --popover: #392d15;
+  --popover-foreground: #f5f0e8;
+  --primary: #f5a300;
+  --primary-foreground: #1b1a18;
+  --secondary: #4a3d1f;
+  --secondary-foreground: #f5f0e8;
+  --muted-foreground: #b8a888;
+  --accent-foreground: #1b1a18;
+  --destructive: oklch(0.704 0.191 22.216);
+  --input: #4a3d1f;
+  --ring: #f5a300;
+
+  --chart-1: #f5a300;
+  --chart-2: #cf8b05;
+  --chart-3: #b8a888;
+  --chart-4: #392d15;
+  --chart-5: #1b1a18;
+
+  --sidebar: #392d15;
+  --sidebar-foreground: #f5f0e8;
+  --sidebar-primary: #f5a300;
+  --sidebar-primary-foreground: #1b1a18;
+  --sidebar-accent: #4a3d1f;
+  --sidebar-accent-foreground: #f5f0e8;
+  --sidebar-border: #4a3d1f;
+  --sidebar-ring: #f5a300;
 }
 
 @theme {
@@ -42,4 +92,61 @@
   --color-accent: var(--accent);
   --color-accent-hover: var(--accent-hover);
   --color-border: var(--border);
+}
+
+@theme inline {
+  --font-heading: var(--font-sans);
+  --font-sans: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  html {
+    @apply font-sans;
+  }
 }
